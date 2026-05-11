@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1-on-1 Services — SpectrumReady</title>
+  <meta name="description" content="Work directly with a SpectrumReady advisor. IEP advocacy, benefits audits, insurance appeal coaching, and transition planning consultations for autism families." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Services-page specific styles ────────────────────────────────────── */
+
+    .services-hero {
+      background: linear-gradient(160deg, var(--color-bg-dark) 0%, #312e81 60%, var(--color-primary) 100%);
+      padding: 100px 0 80px;
+      text-align: center;
+      color: #fff;
+    }
+    .services-hero .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #c7d2fe;
+      padding: 5px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+    .services-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .services-hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 640px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .hero-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-cta-row .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta-row .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.35); }
+    .hero-cta-row .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .hero-cta-row .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    /* Trust bar */
+    .trust-bar {
+      background: var(--color-bg-alt);
+      border-bottom: 1px solid var(--color-border);
+      padding: 18px 0;
+    }
+    .trust-bar .trust-items {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    .trust-bar .trust-items span { display: flex; align-items: center; gap: 6px; }
+    .trust-bar .trust-items span::before { content: "✓"; color: var(--color-success); font-weight: 700; }
+
+    /* Why services section */
+    .why-section { background: #fff; padding: 72px 0; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+    .why-text h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-bg-dark);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .why-text p { color: var(--color-text-muted); line-height: 1.75; margin-bottom: 14px; }
+    .why-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      text-align: center;
+    }
+    .stat-card .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--color-primary); }
+    .stat-card .stat-label { font-size: 13px; color: var(--color-text-muted); margin-top: 4px; line-height: 1.4; }
+
+    /* Services grid */
+    .services-section { background: var(--color-bg-alt); }
+    .services-section h2.section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-bg-dark);
+      margin-bottom: 12px;
+    }
+    .services-section .section-sub {
+      text-align: center;
+      color: var(--color-text-muted);
+      max-width: 580px;
+      margin: 0 auto 52px;
+      font-size: 1.05rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    /* Service card */
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .service-card.featured {
+      border: 2px solid var(--color-primary);
+      position: relative;
+    }
+    .service-card.featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 16px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #ede9fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--color-bg-dark);
+      margin-bottom: 8px;
+    }
+    .service-card .service-format {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .service-card .service-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .service-includes {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+    .service-includes .includes-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+    .service-includes ul { list-style: none; padding: 0; margin: 0; }
+    .service-includes ul li {
+      font-size: 13.5px;
+      color: var(--color-text);
+      padding: 3px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+    .service-includes ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-success);
+      font-weight: 700;
+    }
+    .service-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .service-price { font-size: 2rem; font-weight: 900; color: var(--color-bg-dark); }
+    .service-price-label { font-size: 14px; color: var(--color-text-muted); }
+    .service-card .btn-book {
+      display: block;
+      text-align: center;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 0;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .service-card .btn-book:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .service-card.featured .btn-book {
+      background: var(--color-accent);
+      color: var(--color-bg-dark);
+    }
+    .service-card.featured .btn-book:hover { background: var(--color-accent-dark); }
+
+    /* How it works */
+    .how-section { background: #fff; }
+    .how-section h2.section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-bg-dark);
+      margin-bottom: 48px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+    .step-card { text-align: center; }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step-card h3 { font-size: 1rem; font-weight: 800; color: var(--color-bg-dark); margin-bottom: 8px; }
+    .step-card p { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; }
+
+    /* Packages */
+    .packages-section { background: var(--color-bg-alt); }
+    .packages-section h2.section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-bg-dark);
+      margin-bottom: 12px;
+    }
+    .packages-section .section-sub {
+      text-align: center;
+      color: var(--color-text-muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .package-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+    .package-card.featured-pkg {
+      border: 2px solid var(--color-primary);
+      background: linear-gradient(135deg, #fafafa 0%, #f5f3ff 100%);
+    }
+    .package-badge {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .package-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--color-bg-dark); margin-bottom: 8px; }
+    .package-card .pkg-desc { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 18px; line-height: 1.6; }
+    .pkg-price { font-size: 2.4rem; font-weight: 900; color: var(--color-bg-dark); margin-bottom: 4px; }
+    .pkg-price span { font-size: 1rem; color: var(--color-text-muted); font-weight: 400; }
+    .pkg-savings {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .pkg-items { list-style: none; padding: 0; margin: 0 0 22px; }
+    .pkg-items li {
+      font-size: 14px;
+      padding: 5px 0 5px 22px;
+      position: relative;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .pkg-items li::before { content: "✓"; position: absolute; left: 0; color: var(--color-success); font-weight: 700; }
+    .pkg-items li:last-child { border-bottom: none; }
+    .btn-pkg {
+      display: block;
+      text-align: center;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 0;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-pkg:hover { background: var(--color-primary-dark); }
+    .package-card.featured-pkg .btn-pkg {
+      background: var(--color-accent);
+      color: var(--color-bg-dark);
+    }
+    .package-card.featured-pkg .btn-pkg:hover { background: var(--color-accent-dark); }
+
+    /* Disclaimer + legal note */
+    .legal-note {
+      background: #fef3c7;
+      border: 1px solid #fbbf24;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 48px 0 0;
+    }
+    .legal-note p {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.6;
+    }
+    .legal-note strong { font-weight: 700; }
+
+    /* FAQ */
+    .faq-section { background: #fff; }
+    .faq-section h2.section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-bg-dark);
+      margin-bottom: 40px;
+    }
+    .faq-list { max-width: 740px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--color-border); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 20px 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-bg-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-q .faq-icon { font-size: 1.3rem; color: var(--color-primary); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s; }
+    .faq-a.open { max-height: 400px; padding-bottom: 18px; }
+    .faq-a p { color: var(--color-text-muted); line-height: 1.75; font-size: 0.97rem; }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-bg-dark) 0%, #312e81 100%);
+      text-align: center;
+      padding: 80px 0;
+    }
+    .cta-section h2 { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 14px; }
+    .cta-section p { color: rgba(255,255,255,0.75); max-width: 520px; margin: 0 auto 32px; font-size: 1.05rem; line-height: 1.7; }
+    .cta-section .btn-cta {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-bg-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 15px 36px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-section .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- Disclaimer Banner -->
+<div class="disclaimer-banner">
+  <strong>Important:</strong> SpectrumReady provides educational information and advocacy guidance — not legal, medical, or financial advice. Consult a licensed professional for decisions specific to your situation.
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="SpectrumReady home">SpectrumReady</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#products">Guides</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="index.html#free-guide">Free Guide</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#book" class="btn btn-primary-sm">Book a Session</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="services-hero">
+  <div class="container">
+    <div class="hero-badge">1-on-1 Expert Guidance</div>
+    <h1>You Don't Have to Navigate<br>This Alone</h1>
+    <p>Book a direct session with a SpectrumReady advisor. We help autism families navigate IEP meetings, benefit applications, insurance appeals, and transition planning — step by step, on your schedule.</p>
+    <div class="hero-cta-row">
+      <a href="#book" class="btn-primary">Book a Session</a>
+      <a href="#services" class="btn-ghost">See All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-items">
+      <span>Confidential &amp; Secure</span>
+      <span>Video or Phone</span>
+      <span>No Legal Advice — Advocacy Guidance</span>
+      <span>100% Satisfaction Guarantee</span>
+      <span>Same-Week Availability</span>
+    </div>
+  </div>
+</div>
+
+<!-- Why Section -->
+<section class="why-section">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-text">
+        <h2>The System Is Complicated.<br>You Shouldn't Have to Master It Alone.</h2>
+        <p>Parents of children with autism spend hundreds of hours researching IEP law, benefit eligibility, insurance regulations, and transition planning — mostly from scratch, mostly alone, often at 11pm when the kids are asleep.</p>
+        <p>Our advisors have done that research. We know which programs have waiting lists, which insurance arguments win appeals, and what to say in an IEP meeting when the school pushes back. You get that knowledge in a focused session.</p>
+        <p>This isn't legal advice. It's the kind of knowledgeable friend every autism parent deserves — someone who can sit with you, look at your specific situation, and say: <em>"Here's what I would do next."</em></p>
+      </div>
+      <div class="why-stats">
+        <div class="stat-card">
+          <div class="stat-number">60%</div>
+          <div class="stat-label">of SSI denials are overturned on appeal — most families never appeal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$40K+</div>
+          <div class="stat-label">typical annual value of HCBS waiver services families don't know to apply for</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10 yrs</div>
+          <div class="stat-label">average HCBS waiver waiting list — every day you wait is a day lost</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$150/hr</div>
+          <div class="stat-label">typical rate for IEP advocates — we charge a fraction of that</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services-section" id="services">
+  <div class="container">
+    <h2 class="section-title">Services &amp; Sessions</h2>
+    <p class="section-sub">All sessions are conducted by video or phone. You'll receive a summary email with action items within 24 hours of every session.</p>
+
+    <div class="services-grid">
+
+      <!-- Benefits Audit -->
+      <div class="service-card">
+        <div class="service-icon">💰</div>
+        <h3>Benefits Audit Session</h3>
+        <div class="service-format">60-Minute Video Call</div>
+        <p class="service-desc">We review your family's complete picture — income, child's age and diagnosis, current benefits — and identify every program your family should be pursuing. You'll leave with a prioritized action plan.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>Full review of current benefits status</li>
+            <li>SSI eligibility assessment</li>
+            <li>State HCBS waiver identification</li>
+            <li>ABLE account setup guidance</li>
+            <li>Written action plan delivered within 24 hrs</li>
+            <li>Benefits Audit Worksheet (fillable PDF)</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$127</span>
+          <span class="service-price-label">one-time session</span>
+        </div>
+        <a href="#book" class="btn-book">Book Benefits Audit</a>
+      </div>
+
+      <!-- IEP Prep -->
+      <div class="service-card featured">
+        <div class="service-icon">📋</div>
+        <h3>IEP Meeting Preparation</h3>
+        <div class="service-format">90-Minute Deep Dive + Document Review</div>
+        <p class="service-desc">Submit your current IEP and evaluation reports. We review them before the call, identify every red flag, draft your requests, and prepare you to walk into that meeting knowing exactly what to say and what not to sign.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>Pre-call document review (IEP, evals, reports)</li>
+            <li>Red flag identification — goals, services, placement</li>
+            <li>Personalized list of meeting requests</li>
+            <li>Scripts for difficult pushback scenarios</li>
+            <li>IEP Prep Worksheet (fillable PDF)</li>
+            <li>Follow-up email with drafted Prior Written Notice request (if needed)</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$197</span>
+          <span class="service-price-label">per meeting prep</span>
+        </div>
+        <a href="#book" class="btn-book">Book IEP Prep</a>
+      </div>
+
+      <!-- Insurance Appeal Coaching -->
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <h3>Insurance Appeal Coaching</h3>
+        <div class="service-format">60-Minute Session + Letter Drafting</div>
+        <p class="service-desc">Got a denial? We'll identify exactly why it was denied, which legal argument to use, and help you draft a Level 1 internal appeal letter that cites the right statutes and clinical guidelines.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>Denial analysis — identify the strongest counter-argument</li>
+            <li>Appeal strategy (Level 1 internal → external review)</li>
+            <li>Customized appeal letter draft (you finalize and send)</li>
+            <li>Letter of Medical Necessity template for physician</li>
+            <li>Insurance Denial Tracker worksheet</li>
+            <li>60-day follow-up check-in (email)</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$147</span>
+          <span class="service-price-label">per denial</span>
+        </div>
+        <a href="#book" class="btn-book">Book Appeal Coaching</a>
+      </div>
+
+      <!-- Transition Planning -->
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Transition Planning Session</h3>
+        <div class="service-format">90-Minute Strategic Planning Call</div>
+        <p class="service-desc">For families with children ages 12–22. We map out your transition timeline, identify every deadline you cannot miss (SSI at 18, VR enrollment, waiver waitlists), and build a year-by-year action plan.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>Year-by-year transition roadmap</li>
+            <li>SSI application timing and strategy</li>
+            <li>Guardianship vs. alternatives analysis</li>
+            <li>Special Needs Trust planning overview</li>
+            <li>Transition Master Checklist (fillable PDF)</li>
+            <li>Written summary delivered within 24 hours</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$167</span>
+          <span class="service-price-label">one-time session</span>
+        </div>
+        <a href="#book" class="btn-book">Book Transition Planning</a>
+      </div>
+
+      <!-- SSI Application Walkthrough -->
+      <div class="service-card">
+        <div class="service-icon">📝</div>
+        <h3>SSI Application Walkthrough</h3>
+        <div class="service-format">90-Minute Guided Session</div>
+        <p class="service-desc">We walk through the SSI application together, page by page. You'll learn exactly how to describe your child's functional limitations in the way SSA evaluators look for — covering worst-day functioning, not average days.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>Step-by-step SSI application guidance</li>
+            <li>Child Function Report (SSA-3375) walkthrough</li>
+            <li>Document checklist — what to gather</li>
+            <li>SSI cover letter template</li>
+            <li>Denial prevention tips (what reviewers look for)</li>
+            <li>If denied: appeal strategy overview</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$97</span>
+          <span class="service-price-label">per session</span>
+        </div>
+        <a href="#book" class="btn-book">Book SSI Walkthrough</a>
+      </div>
+
+      <!-- Monthly Advisory -->
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>Monthly Advisory Membership</h3>
+        <div class="service-format">Ongoing Monthly Support</div>
+        <p class="service-desc">Two 45-minute sessions per month, unlimited email questions between sessions, and priority booking. Best for families actively navigating multiple systems simultaneously — IEP, insurance, and benefits at the same time.</p>
+        <div class="service-includes">
+          <div class="includes-title">What's Included</div>
+          <ul>
+            <li>2 × 45-minute sessions per month</li>
+            <li>Unlimited email support between sessions</li>
+            <li>Priority booking (within 48 hours)</li>
+            <li>All worksheets and templates included</li>
+            <li>Monthly benefits/IEP situation review</li>
+            <li>Cancel anytime — no contracts</li>
+          </ul>
+        </div>
+        <div class="service-price-row">
+          <span class="service-price">$247</span>
+          <span class="service-price-label">/month — cancel anytime</span>
+        </div>
+        <a href="#book" class="btn-book">Start Monthly Advisory</a>
+      </div>
+
+    </div><!-- /services-grid -->
+
+    <!-- Legal note -->
+    <div class="legal-note">
+      <p><strong>Important:</strong> SpectrumReady advisors provide educational information, advocacy guidance, and navigation support. We are not attorneys, physicians, or licensed financial advisors, and our services do not constitute legal, medical, or financial advice. For complex legal matters (due process hearings, guardianship proceedings, estate planning), we will refer you to the appropriate licensed professional. All client information is kept strictly confidential and is never shared with third parties.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Book Online</h3>
+        <p>Choose your service and select a time that works for you. Confirmation and intake form sent immediately.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Submit Documents</h3>
+        <p>Share any relevant documents (IEP, denial letters, reports) via the secure intake portal before your session.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>We Prepare</h3>
+        <p>Your advisor reviews everything before the call so your session time is focused on your specific situation — not background explanation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Your Session</h3>
+        <p>60 or 90 minutes of focused, practical guidance. Ask everything. Leave with a clear action plan.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Written Summary</h3>
+        <p>Within 24 hours, you receive a written recap of everything discussed and all action items — ready to act on immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section class="packages-section" id="book">
+  <div class="container">
+    <h2 class="section-title">Bundle &amp; Save</h2>
+    <p class="section-sub">Most families need guidance across multiple areas. Our packages combine the highest-impact services at a significant discount.</p>
+
+    <div class="packages-grid">
+
+      <div class="package-card">
+        <div class="package-badge">New Family</div>
+        <h3>Newly Diagnosed Starter Package</h3>
+        <p class="pkg-desc">Everything you need in the first 90 days after diagnosis. Benefits audit + IEP prep for your first meeting + SSI walkthrough.</p>
+        <div class="pkg-price">$347 <span>/ package</span></div>
+        <div class="pkg-savings">Save $74 vs. individual sessions</div>
+        <ul class="pkg-items">
+          <li>Benefits Audit Session (60 min)</li>
+          <li>IEP Meeting Prep (90 min + doc review)</li>
+          <li>SSI Application Walkthrough (90 min)</li>
+          <li>All 5 fillable worksheets</li>
+          <li>All 7 letter templates</li>
+          <li>30-day email follow-up support</li>
+        </ul>
+        <a href="mailto:support@spectrumready.com?subject=Newly Diagnosed Starter Package" class="btn-pkg">Get Started</a>
+      </div>
+
+      <div class="package-card featured-pkg">
+        <div class="package-badge">Best Value</div>
+        <h3>Full Advocacy Package</h3>
+        <p class="pkg-desc">For families actively fighting on multiple fronts — IEP battles, insurance denials, and benefits gaps. Our most comprehensive support package.</p>
+        <div class="pkg-price">$497 <span>/ package</span></div>
+        <div class="pkg-savings">Save $141 vs. individual sessions</div>
+        <ul class="pkg-items">
+          <li>Benefits Audit Session (60 min)</li>
+          <li>IEP Meeting Prep (90 min + doc review)</li>
+          <li>Insurance Appeal Coaching (60 min + letter)</li>
+          <li>Transition Planning Session (90 min)</li>
+          <li>All 5 fillable worksheets + all 7 templates</li>
+          <li>60-day email support</li>
+          <li>Priority booking for all sessions</li>
+        </ul>
+        <a href="mailto:support@spectrumready.com?subject=Full Advocacy Package" class="btn-pkg">Get Full Package</a>
+      </div>
+
+      <div class="package-card">
+        <div class="package-badge">Transition Age</div>
+        <h3>Transition to Adulthood Package</h3>
+        <p class="pkg-desc">For families with children ages 14–22. Covers every major transition milestone: SSI at 18, adult services, employment, housing, and financial planning.</p>
+        <div class="pkg-price">$397 <span>/ package</span></div>
+        <div class="pkg-savings">Save $67 vs. individual sessions</div>
+        <ul class="pkg-items">
+          <li>Transition Planning Session (90 min)</li>
+          <li>SSI Application Walkthrough (90 min)</li>
+          <li>Benefits Audit + Adult Services Review (60 min)</li>
+          <li>Transition Master Checklist (fillable)</li>
+          <li>Special Needs Trust planning overview</li>
+          <li>30-day email follow-up support</li>
+        </ul>
+        <a href="mailto:support@spectrumready.com?subject=Transition to Adulthood Package" class="btn-pkg">Get Transition Package</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Are you attorneys? Is this legal advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No. SpectrumReady advisors are educational advocates and benefits navigators — not attorneys. We provide information, guidance, and advocacy support. We help you understand how the system works, prepare you to advocate effectively, and draft documents for your review. For matters that require an attorney (due process hearings, estate planning, guardianship), we'll refer you to the right resource. Think of us as the knowledgeable friend who's done this research — not a lawyer.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How is this different from just reading your guides?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>The guides teach you how the systems work. A service session applies that knowledge to your specific child, your specific IEP, your specific denial. There's a big difference between knowing that you can appeal an insurance denial and having someone review your actual denial letter and tell you exactly which argument to make and which statute to cite. Services are for families who need to act, not just understand.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is my information kept confidential?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Absolutely. All client information, documents, and session content is strictly confidential and never shared with any third party. Documents are shared via a secure portal and deleted after your engagement is complete. We sign a confidentiality agreement with every client as part of the intake process.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I'm not satisfied with my session?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We offer a 100% satisfaction guarantee. If you're not satisfied with your session, contact us within 7 days and we'll either schedule a follow-up session at no charge or provide a full refund — your choice. We're not in the business of taking money from exhausted autism parents who didn't get value.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need to have purchased your guides first?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No — services are available to anyone. The guides are excellent preparation if you have time to read them beforehand, but they're not required. Your advisor will make sure you have the context you need during the session.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How quickly can I get an appointment?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We aim for same-week availability for all services. Most clients are scheduled within 2–4 days of booking. If you have an urgent situation (IEP meeting tomorrow, appeal deadline in 5 days), email us at support@spectrumready.com and we will do our best to accommodate.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Stop Navigating Alone?</h2>
+    <p>Book a session this week. You'll have a clear action plan within 24 hours. If it doesn't help, you get your money back.</p>
+    <a href="mailto:support@spectrumready.com?subject=Book a Session" class="btn-cta">Book Your Session Now</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">SpectrumReady</div>
+        <p>Empowering autism families with the knowledge and guidance they deserve.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="index.html#products">All Guides</a></li>
+            <li><a href="index.html#free-guide">Free Guide</a></li>
+            <li><a href="index.html#bundle">Complete Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Benefits Audit</a></li>
+            <li><a href="#services">IEP Prep</a></li>
+            <li><a href="#services">Insurance Appeal</a></li>
+            <li><a href="#services">Transition Planning</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="mailto:support@spectrumready.com">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SpectrumReady. All rights reserved.</p>
+      <p class="footer-disclaimer">Educational information only. Not legal, medical, or financial advice. Content current as of 2025 — verify benefit amounts and program rules with the relevant agency before making decisions.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', function () {
+    const links = document.getElementById('navLinks');
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    links.classList.toggle('open');
+  });
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(b => b.classList.remove('open'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+</script>
+
+</body>
+</html>
