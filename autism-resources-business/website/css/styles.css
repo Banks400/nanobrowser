@@ -143,6 +143,19 @@ p { color: var(--color-text-muted); line-height: 1.7; }
 
 .btn-full { width: 100%; }
 
+/* ---------- DISCLAIMER BANNER ---------- */
+.disclaimer-banner {
+  background: #fef3c7;
+  border-bottom: 1px solid #fcd34d;
+  padding: 8px 0;
+  font-size: 0.8rem;
+  color: #78350f;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.disclaimer-banner strong { color: #92400e; }
+
 /* ---------- NAVBAR ---------- */
 .navbar {
   position: sticky;
