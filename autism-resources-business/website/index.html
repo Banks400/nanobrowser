@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpectrumReady — Autism Parent Resources | Guides, Benefits & Tools</title>
+    <meta
+      name="description"
+      content="Plain-English PDF guides helping autism parents navigate benefits, IEPs, therapies, insurance, and transition planning. Instantly downloadable. Thousands of families served."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container nav-inner">
+        <a href="/" class="logo">
+          <span class="logo-mark">SR</span>
+          <span class="logo-text">SpectrumReady</span>
+        </a>
+        <div class="nav-links">
+          <a href="#products">Guides</a>
+          <a href="#about">About</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#free-guide" class="btn btn-sm btn-outline">Free Guide</a>
+        </div>
+        <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-badge">Trusted by 4,800+ Autism Families</div>
+        <h1 class="hero-headline">
+          Stop Feeling Lost.<br />
+          <span class="gradient-text">Start Knowing Exactly What To Do.</span>
+        </h1>
+        <p class="hero-sub">
+          Plain-English guides that walk you through every benefit, program, therapy, and legal right
+          available to your child — so you never miss out on what they deserve.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#free-guide" class="btn btn-primary btn-lg">
+            Get the Free Guide →
+          </a>
+          <a href="#products" class="btn btn-ghost btn-lg">See All Guides</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>Instant PDF download</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>30-day money-back guarantee</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            <span>Written by autism advocates</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAIN SECTION -->
+    <section class="pain-section">
+      <div class="container">
+        <div class="pain-grid">
+          <div class="pain-card">
+            <div class="pain-emoji">😩</div>
+            <p>"I had no idea there were this many benefits available. I spent 3 years missing out."</p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-emoji">📚</div>
+            <p>"The IEP meeting felt like everyone knew something I didn't. I just signed whatever they put in front of me."</p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-emoji">💸</div>
+            <p>"We spent $40k out of pocket before someone told us insurance was required to cover ABA."</p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-emoji">😰</div>
+            <p>"My son is turning 21 this year and I still have no idea what comes next. I'm terrified."</p>
+          </div>
+        </div>
+        <div class="pain-message">
+          <h2>You shouldn't have to figure this out alone.</h2>
+          <p>
+            The programs exist. The rights exist. The funding exists. What's missing is a clear, organized guide that
+            walks you through it all — without the jargon, without the bureaucratic runaround.
+          </p>
+          <p>
+            <strong>That's exactly what SpectrumReady is.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE GUIDE SECTION -->
+    <section class="free-guide-section" id="free-guide">
+      <div class="container">
+        <div class="free-guide-inner">
+          <div class="free-guide-content">
+            <div class="free-badge">FREE DOWNLOAD</div>
+            <h2>5 Programs Every Autism Parent Must Know About</h2>
+            <p>
+              Most families miss out on thousands of dollars in benefits every year simply because they
+              didn't know to ask. This free guide reveals the 5 most impactful programs — and how to
+              access them today.
+            </p>
+            <ul class="free-guide-list">
+              <li>✓ The government benefit that can provide $943/month (most families don't know they qualify)</li>
+              <li>✓ The free therapy and school services guaranteed by federal law</li>
+              <li>✓ The savings account that protects your child's future without affecting benefits</li>
+              <li>✓ The waiver program worth $20k–$80k/year (and why you need to apply TODAY)</li>
+              <li>✓ Your child's legal rights to ABA therapy — even when the insurance says no</li>
+            </ul>
+          </div>
+          <div class="free-guide-form">
+            <div class="form-card">
+              <h3>Get Instant Access — Free</h3>
+              <p class="form-sub">Join 4,800+ autism parents. No spam, ever.</p>
+              <form id="leadForm" onsubmit="handleLeadForm(event)">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Your first name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                  Send Me the Free Guide →
+                </button>
+                <p class="form-legal">
+                  We respect your privacy. Unsubscribe any time. By entering your email, you agree to
+                  receive occasional emails from SpectrumReady. Read our
+                  <a href="privacy.html">Privacy Policy</a>.
+                </p>
+              </form>
+              <div id="formSuccess" class="form-success hidden">
+                <div class="success-icon">✓</div>
+                <h4>Check your inbox!</h4>
+                <p>The free guide is on its way. While you're here — check out our complete guides below.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="products">
+      <div class="container">
+        <div class="section-header">
+          <h2>Complete Guides for Every Stage of Your Journey</h2>
+          <p>Comprehensive, instantly downloadable PDFs written in plain English for busy autism parents.</p>
+        </div>
+
+        <!-- BUNDLE HIGHLIGHT -->
+        <div class="bundle-card">
+          <div class="bundle-badge">BEST VALUE — SAVE 55%</div>
+          <div class="bundle-inner">
+            <div class="bundle-content">
+              <h3>The Complete Autism Parent Toolkit</h3>
+              <p>
+                Everything you need — all 6 comprehensive guides in one bundle. Benefits, IEP advocacy,
+                therapies, insurance, diagnosis, and transition planning. Over 300 pages of expert guidance.
+              </p>
+              <ul class="bundle-includes">
+                <li>✓ The Autism Benefits Navigator ($47 value)</li>
+                <li>✓ IEP Mastery: The Parent's Advocacy Bible ($47 value)</li>
+                <li>✓ The Complete Therapy Roadmap ($47 value)</li>
+                <li>✓ The Autism Insurance Battle Guide ($37 value)</li>
+                <li>✓ Navigating the Diagnosis Journey ($37 value)</li>
+                <li>✓ Transition to Adulthood Planner ($47 value)</li>
+                <li>✓ <strong>BONUS:</strong> 90-Day Action Planner Template</li>
+                <li>✓ <strong>BONUS:</strong> State-by-State Benefits Quick Reference</li>
+              </ul>
+              <div class="bundle-pricing">
+                <span class="price-original">$262 value</span>
+                <span class="price-bundle">$127</span>
+                <span class="price-save">You save $135</span>
+              </div>
+              <a href="#" class="btn btn-primary btn-lg" onclick="handlePurchase('bundle')">
+                Get the Complete Toolkit — $127 →
+              </a>
+              <p class="guarantee-text">30-day money-back guarantee. No questions asked.</p>
+            </div>
+            <div class="bundle-visual">
+              <div class="book-stack">
+                <div class="book book-1">Benefits Navigator</div>
+                <div class="book book-2">IEP Mastery</div>
+                <div class="book book-3">Therapy Roadmap</div>
+                <div class="book book-4">+3 More Guides</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INDIVIDUAL PRODUCTS GRID -->
+        <div class="products-divider">
+          <span>Or purchase individual guides</span>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-icon">💰</div>
+            <div class="product-label">Most Popular</div>
+            <h3>The Autism Benefits Navigator</h3>
+            <p>
+              Every federal and state benefit your family is entitled to — SSI, Medicaid waivers, ABLE
+              accounts, grants, tax benefits, and more. With step-by-step application instructions.
+            </p>
+            <div class="product-highlights">
+              <span>SSI & Medicaid</span>
+              <span>HCBS Waivers</span>
+              <span>ABLE Accounts</span>
+              <span>Grants</span>
+              <span>Tax Benefits</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$47</span>
+              <span class="product-pages">~60 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('benefits')">
+              Get This Guide — $47
+            </a>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-icon">📋</div>
+            <h3>IEP Mastery: The Parent's Advocacy Bible</h3>
+            <p>
+              Walk into every IEP meeting as an equal partner. Learn your child's legal rights, how to
+              write effective goals, and exactly what to say when the school says no.
+            </p>
+            <div class="product-highlights">
+              <span>IDEA Rights</span>
+              <span>IEP Goals</span>
+              <span>Meeting Scripts</span>
+              <span>Appeal Process</span>
+              <span>Placement</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$47</span>
+              <span class="product-pages">~65 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('iep')">
+              Get This Guide — $47
+            </a>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-icon">🧩</div>
+            <h3>The Complete Therapy Roadmap</h3>
+            <p>
+              Cut through the confusion. Know exactly which therapies have the best evidence, when to
+              use them, what good providers look like, and how to build your child's dream team.
+            </p>
+            <div class="product-highlights">
+              <span>ABA</span>
+              <span>Speech Therapy</span>
+              <span>OT</span>
+              <span>Evidence Ratings</span>
+              <span>Team Building</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$47</span>
+              <span class="product-pages">~55 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('therapy')">
+              Get This Guide — $47
+            </a>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-icon">⚔️</div>
+            <h3>The Autism Insurance Battle Guide</h3>
+            <p>
+              Know your rights, fight denials, and win. Covers federal parity laws, state mandates,
+              the 4-level appeal process, and scripts for every insurance conversation.
+            </p>
+            <div class="product-highlights">
+              <span>Denial Appeals</span>
+              <span>State Mandates</span>
+              <span>ABA Coverage</span>
+              <span>Scripts</span>
+              <span>Legal Rights</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$37</span>
+              <span class="product-pages">~40 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('insurance')">
+              Get This Guide — $37
+            </a>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card">
+            <div class="product-icon">🧭</div>
+            <h3>Navigating the Diagnosis Journey</h3>
+            <p>
+              A step-by-step guide for newly diagnosed families — from understanding the evaluation
+              process to your complete 90-day action plan for getting services started.
+            </p>
+            <div class="product-highlights">
+              <span>Evaluation Types</span>
+              <span>90-Day Plan</span>
+              <span>Team Building</span>
+              <span>Emotional Support</span>
+              <span>Early Steps</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$37</span>
+              <span class="product-pages">~45 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('diagnosis')">
+              Get This Guide — $37
+            </a>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card">
+            <div class="product-icon">🚀</div>
+            <h3>Transition to Adulthood Planner</h3>
+            <p>
+              Don't face "the cliff" unprepared. A year-by-year roadmap from age 12 to 21+, covering
+              SSI at 18, guardianship, Special Needs Trusts, employment, and housing.
+            </p>
+            <div class="product-highlights">
+              <span>Year-by-Year Plan</span>
+              <span>Legal Decisions</span>
+              <span>Employment</span>
+              <span>Housing</span>
+              <span>Adult Services</span>
+            </div>
+            <div class="product-pricing">
+              <span class="product-price">$47</span>
+              <span class="product-pages">~50 pages</span>
+            </div>
+            <a href="#" class="btn btn-secondary btn-full" onclick="handlePurchase('transition')">
+              Get This Guide — $47
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>What Autism Parents Are Saying</h2>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "The Benefits Navigator alone paid for itself 100x over. I had no idea my son qualified
+              for SSI. We're now getting $800/month and have him on the Medicaid waiver waiting list.
+              I wish I'd found this 5 years ago."
+            </p>
+            <div class="testimonial-author">
+              <strong>Maria T.</strong>
+              <span>Mom of 9-year-old with autism, Texas</span>
+            </div>
+          </div>
+          <div class="testimonial-card featured">
+            <div class="stars">★★★★★</div>
+            <p>
+              "I walked into my son's IEP meeting with the advocacy guide printed out. For the first
+              time, I knew exactly what questions to ask and what I was legally entitled to demand.
+              He's getting 25 hours of ABA per week now — up from 10. It changed everything."
+            </p>
+            <div class="testimonial-author">
+              <strong>Jennifer K.</strong>
+              <span>Mom of 7-year-old, Ohio</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "The Insurance Battle Guide gave me the exact language to use when appealing the denial
+              for ABA therapy. They approved it on the second appeal. 3 months of coverage =
+              $18,000 in services. $37 well spent."
+            </p>
+            <div class="testimonial-author">
+              <strong>David R.</strong>
+              <span>Dad of 5-year-old, Florida</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "My daughter is turning 18 this year and I was absolutely terrified. The Transition Guide
+              had me in tears — good tears. I finally have a plan. We've opened her ABLE account,
+              started the guardianship process, and filed for SSI. Thank you."
+            </p>
+            <div class="testimonial-author">
+              <strong>Rachel M.</strong>
+              <span>Mom of 17-year-old, California</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "Just diagnosed last month. I was drowning. These guides were like having an expert
+              friend sit down with me and explain everything in plain English. The 90-day checklist
+              in the Diagnosis Guide alone was worth every penny."
+            </p>
+            <div class="testimonial-author">
+              <strong>Amanda H.</strong>
+              <span>Mom of 4-year-old, New York</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "Bought the complete bundle and read all 6 guides in a weekend. I feel like I went from
+              a confused bystander to an informed advocate overnight. Truly empowering content."
+            </p>
+            <div class="testimonial-author">
+              <strong>Michael S.</strong>
+              <span>Dad of 11-year-old, Georgia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-content">
+            <h2>Why SpectrumReady Exists</h2>
+            <p>
+              When families receive an autism diagnosis, they're handed a stack of brochures and a list
+              of phone numbers. The programs exist. The rights exist. The funding exists.
+            </p>
+            <p>
+              What doesn't exist is a clear, organized, plain-English roadmap that connects all of
+              it together — one that a exhausted, overwhelmed parent can actually use.
+            </p>
+            <p>
+              SpectrumReady was created to fill that gap. Our guides are researched, comprehensive,
+              and written for real parents — not clinicians, not bureaucrats, not attorneys. Just
+              families who deserve to know exactly what their child is entitled to and how to get it.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">4,800+</span>
+                <span class="stat-label">Families Served</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Comprehensive Guides</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">300+</span>
+                <span class="stat-label">Pages of Content</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">30-day</span>
+                <span class="stat-label">Money-Back Guarantee</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-visual">
+            <div class="about-card">
+              <div class="about-quote">"</div>
+              <p>
+                Every autism family deserves to know what they're entitled to. Information
+                shouldn't be a luxury.
+              </p>
+              <div class="about-attribution">— The SpectrumReady Team</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What format are the guides in? How do I receive them?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              All guides are PDF files — readable on any device (phone, tablet, computer). After
+              purchase, you'll receive an instant download link via email. You can read them on screen
+              or print them out for your binder.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Are these guides specific to my state?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              The guides cover federal laws and programs that apply in all 50 states, plus state-specific
+              guidance where relevant (the Insurance Battle Guide includes a state-by-state mandate
+              summary, for example). For highly state-specific details, we include research tips to
+              find your state's specific resources.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              My child was just diagnosed. Which guide should I start with?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Start with "Navigating the Diagnosis Journey" — it's written specifically for newly
+              diagnosed families and includes a 90-day action plan. Then read the Benefits Navigator
+              to understand what financial support is available, and the Therapy Roadmap to understand
+              your treatment options. The bundle is the best value if you want all 6 guides at once.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What's your refund policy?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              We offer a 30-day, no-questions-asked money-back guarantee. If you're not satisfied
+              for any reason, email us at support@spectrumready.com and we'll issue a full refund
+              within 24 hours. We believe in our content and stand behind it completely.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              My child is an adult or teenager. Are these guides still useful?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes — we have guides specifically for older children and young adults. The Transition
+              to Adulthood Planner is designed for families of teens (12+) and covers adult services,
+              SSI at 18, guardianship, employment, and housing. The Benefits Navigator covers adult
+              benefits as well. The bundle covers all ages and stages.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Are these guides written by doctors or therapists?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Our guides are written by autism advocates and researchers with deep expertise in
+              navigating the systems autism families face. The content is thoroughly researched
+              and cites current federal law, peer-reviewed research, and guidance from major
+              autism organizations. For medical decisions, always consult your child's treating
+              clinicians.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="container">
+        <h2>Your Child Deserves Every Advantage.</h2>
+        <p>
+          The programs, rights, and support systems exist. The only question is whether you know
+          about them. Start with the free guide — and take the first step toward making sure your
+          child gets everything they deserve.
+        </p>
+        <div class="cta-group">
+          <a href="#free-guide" class="btn btn-primary btn-lg">
+            Get the Free Guide →
+          </a>
+          <a href="#products" class="btn btn-ghost btn-lg">
+            See All Guides
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="logo-mark">SR</span>
+          <span class="logo-text">SpectrumReady</span>
+          <p>Empowering autism families with the knowledge they deserve.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Guides</h4>
+            <a href="#products">Benefits Navigator</a>
+            <a href="#products">IEP Mastery</a>
+            <a href="#products">Therapy Roadmap</a>
+            <a href="#products">Insurance Guide</a>
+            <a href="#products">Diagnosis Guide</a>
+            <a href="#products">Transition Planner</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#about">About Us</a>
+            <a href="#free-guide">Free Guide</a>
+            <a href="mailto:support@spectrumready.com">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>
+            © 2025 SpectrumReady. All rights reserved. |
+            <em>
+              This site is for informational purposes only and does not constitute legal, medical, or
+              financial advice. Always consult qualified professionals for individual guidance.
+            </em>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
