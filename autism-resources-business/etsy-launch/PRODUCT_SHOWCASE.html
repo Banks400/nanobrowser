@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpectrumReady — Product Showcase</title>
+<style>
+  :root {
+    --navy: #1a2744;
+    --purple: #6b46c1;
+    --purple-light: #9f7aea;
+    --teal: #0d9488;
+    --gold: #d97706;
+    --bg: #f8f7ff;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+    --text: #111827;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy);
+    padding: 48px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(107,70,193,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(13,148,136,0.25) 0%, transparent 60%);
+  }
+  header > * { position: relative; z-index: 1; }
+  .logo { font-size: 13px; font-family: sans-serif; letter-spacing: 4px; color: var(--purple-light); text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: clamp(28px, 4vw, 48px); color: white; font-weight: 700; margin-bottom: 12px; }
+  header p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto 28px; }
+  .header-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 32px; font-weight: 700; color: var(--purple-light); }
+  .stat .lbl { font-size: 12px; font-family: sans-serif; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── Section titles ── */
+  .section { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-tag { display: inline-block; font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); background: rgba(107,70,193,0.1); padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
+  .section-title { font-size: clamp(22px, 3vw, 36px); color: var(--navy); margin-bottom: 12px; }
+  .section-sub { font-size: 17px; color: var(--gray); }
+
+  /* ── Guide cards ── */
+  .guides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+  .guide-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .guide-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+  .guide-banner { height: 8px; }
+  .guide-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+  .guide-num { font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+  .guide-title { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
+  .guide-tagline { font-size: 14px; color: var(--gray); margin-bottom: 20px; font-style: italic; }
+  .guide-features { list-style: none; flex: 1; }
+  .guide-features li { font-family: sans-serif; font-size: 13.5px; color: var(--text); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+  .guide-features li:last-child { border-bottom: none; }
+  .guide-features li::before { content: '→'; color: var(--purple); font-weight: 700; flex-shrink: 0; }
+  .guide-footer { padding: 20px 28px; background: var(--gray-light); display: flex; justify-content: space-between; align-items: center; }
+  .price { font-size: 26px; font-weight: 700; color: var(--navy); font-family: sans-serif; }
+  .price span { font-size: 14px; font-weight: 400; color: var(--gray); }
+  .badge { font-family: sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+  .badge-includes { background: rgba(13,148,136,0.12); color: var(--teal); }
+  .badge-bundle { background: rgba(107,70,193,0.12); color: var(--purple); }
+  .badge-free { background: rgba(217,119,6,0.12); color: var(--gold); }
+
+  /* ── Worksheet cards ── */
+  .ws-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+  .ws-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--teal);
+    transition: transform 0.2s;
+  }
+  .ws-card:hover { transform: translateY(-3px); }
+  .ws-icon { font-size: 28px; margin-bottom: 12px; }
+  .ws-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; line-height: 1.3; }
+  .ws-desc { font-family: sans-serif; font-size: 12.5px; color: var(--gray); }
+  .ws-file { font-family: monospace; font-size: 11px; color: var(--purple); margin-top: 10px; }
+
+  /* ── Template cards ── */
+  .tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .tpl-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--purple);
+    transition: transform 0.2s;
+  }
+  .tpl-card:hover { transform: translateY(-3px); }
+  .tpl-icon { font-size: 28px; margin-bottom: 12px; }
+  .tpl-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; line-height: 1.3; }
+  .tpl-use { font-family: sans-serif; font-size: 12px; color: var(--gray); }
+  .tpl-format { font-family: sans-serif; font-size: 11px; color: var(--purple); margin-top: 8px; font-weight: 600; }
+
+  /* ── Bundle highlight ── */
+  .bundle-card {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 48px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .bundle-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 0% 100%, rgba(107,70,193,0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 100% 0%, rgba(13,148,136,0.3) 0%, transparent 60%);
+  }
+  .bundle-card > * { position: relative; z-index: 1; }
+  .bundle-tag { display: inline-block; font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-light); background: rgba(159,122,234,0.15); padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+  .bundle-title { font-size: 30px; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+  .bundle-sub { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 32px; }
+  .bundle-includes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 36px; }
+  .bundle-item { font-family: sans-serif; font-size: 13.5px; color: rgba(255,255,255,0.85); display: flex; gap: 8px; align-items: flex-start; }
+  .bundle-item::before { content: '✓'; color: var(--purple-light); font-weight: 700; flex-shrink: 0; }
+  .bundle-pricing { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .bundle-price { font-size: 52px; font-weight: 700; color: white; font-family: sans-serif; }
+  .bundle-compare { }
+  .bundle-compare .was { font-family: sans-serif; font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: line-through; }
+  .bundle-compare .save { font-family: sans-serif; font-size: 16px; color: #86efac; font-weight: 700; }
+
+  /* ── Etsy table ── */
+  .etsy-section { background: white; }
+  .etsy-table { width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 14px; }
+  .etsy-table th { background: var(--navy); color: white; padding: 14px 18px; text-align: left; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .etsy-table td { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .etsy-table tr:last-child td { border-bottom: none; }
+  .etsy-table tr:nth-child(even) td { background: var(--gray-light); }
+  .listing-num { font-weight: 700; color: var(--purple); }
+  .price-tag { font-weight: 700; color: var(--navy); font-size: 15px; }
+  .net-tag { color: var(--teal); font-weight: 700; }
+  .status-ready { display: inline-flex; align-items: center; gap: 5px; background: rgba(13,148,136,0.1); color: var(--teal); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+  .status-ready::before { content: '●'; font-size: 8px; }
+
+  /* ── Files block ── */
+  .files-block {
+    background: #1e1e2e;
+    border-radius: 12px;
+    padding: 28px;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 2;
+    overflow-x: auto;
+  }
+  .files-block .dir { color: #9f7aea; font-weight: 700; }
+  .files-block .pdf { color: #86efac; }
+  .files-block .docx { color: #93c5fd; }
+  .files-block .zip { color: #fcd34d; }
+  .files-block .comment { color: #6b7280; }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+    font-family: sans-serif; font-size: 15px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: rgba(107,70,193,0.1); border: 2px solid var(--purple);
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .check-label { flex: 1; }
+  .check-label strong { display: block; color: var(--navy); margin-bottom: 2px; }
+  .check-label span { font-size: 13px; color: var(--gray); }
+  .check-done .check-box { background: var(--teal); border-color: var(--teal); }
+  .check-done .check-box::after { content: '✓'; display: block; color: white; font-size: 13px; text-align: center; line-height: 18px; font-weight: 700; }
+
+  /* ── Footer ── */
+  footer { background: var(--navy); text-align: center; padding: 40px 24px; color: rgba(255,255,255,0.5); font-family: sans-serif; font-size: 13px; }
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  @media (max-width: 600px) {
+    .bundle-includes { grid-template-columns: 1fr; }
+    .header-stats { gap: 24px; }
+    .bundle-card { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header>
+  <div class="logo">SpectrumReady</div>
+  <h1>Complete Product Catalog</h1>
+  <p>Everything built and ready to sell. 19 files across 9 Etsy listings.</p>
+  <div class="header-stats">
+    <div class="stat"><div class="num">6</div><div class="lbl">PDF Guides</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Worksheets</div></div>
+    <div class="stat"><div class="num">7</div><div class="lbl">Letter Templates</div></div>
+    <div class="stat"><div class="num">9</div><div class="lbl">Etsy Listings</div></div>
+    <div class="stat"><div class="num">$638</div><div class="lbl">Max Cart Value</div></div>
+  </div>
+</header>
+
+<!-- ══════════════════ GUIDES ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Core Products</div>
+    <div class="section-title">6 PDF Guides — The Foundation</div>
+    <div class="section-sub">Each guide is 30–50 pages of actionable, research-backed content written in plain English.</div>
+  </div>
+
+  <div class="guides-grid">
+
+    <!-- Guide 1 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #6b46c1, #9f7aea);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 01 · Benefits Navigator</div>
+        <div class="guide-title">The Autism Benefits Navigator</div>
+        <div class="guide-tagline">Every dollar your family is entitled to — step by step.</div>
+        <ul class="guide-features">
+          <li>SSI eligibility walkthrough + application steps</li>
+          <li>Medicaid &amp; HCBS Waiver services ($20K–80K/yr)</li>
+          <li>ABLE accounts — save up to $100K without losing SSI</li>
+          <li>SNAP, Section 8, WIC, Early Intervention</li>
+          <li>Private grants directory for autism families</li>
+          <li>Tax benefits: FSA, medical deductions</li>
+          <li>Master action checklist + resource directory</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$47 <span>/ listing</span></div>
+        <span class="badge badge-includes">+ Worksheet</span>
+      </div>
+    </div>
+
+    <!-- Guide 2 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #0d9488, #2dd4bf);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 02 · IEP Mastery</div>
+        <div class="guide-title">IEP Mastery: The Complete Advocacy Playbook</div>
+        <div class="guide-tagline">Walk into every IEP meeting knowing more than the school.</div>
+        <ul class="guide-features">
+          <li>6 core legal rights under IDEA (federal law)</li>
+          <li>Endrew F. Supreme Court ruling — how to use it</li>
+          <li>All 13 required IEP components explained</li>
+          <li>Strong goal examples: communication, behavior, self-care</li>
+          <li>IEP meeting scripts for difficult conversations</li>
+          <li>6-level escalation: complaint → mediation → due process</li>
+          <li>BIP, FBA, AAC, ESY rights explained</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$47 <span>/ listing</span></div>
+        <span class="badge badge-includes">+ Worksheet</span>
+      </div>
+    </div>
+
+    <!-- Guide 3 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #d97706, #f59e0b);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 03 · Therapy Roadmap</div>
+        <div class="guide-title">The Complete Therapy Roadmap</div>
+        <div class="guide-tagline">Evidence ratings for every major autism intervention — no hype.</div>
+        <ul class="guide-features">
+          <li>ABA: what the research actually says</li>
+          <li>Speech-language therapy: goals by age</li>
+          <li>OT, PT, sensory integration evidence review</li>
+          <li>Red flags for ineffective providers</li>
+          <li>How to fund therapy: insurance + Medicaid + grants</li>
+          <li>Building a coordinated therapy team</li>
+          <li>Therapy schedule by age guide</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$47 <span>/ listing</span></div>
+        <span class="badge badge-includes">+ Worksheet</span>
+      </div>
+    </div>
+
+    <!-- Guide 4 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #2563eb, #60a5fa);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 04 · Diagnosis Journey</div>
+        <div class="guide-title">Navigating the Diagnosis Journey</div>
+        <div class="guide-tagline">From the first concern to the first service — in 90 days.</div>
+        <ul class="guide-features">
+          <li>DSM-5-TR criteria explained in plain English</li>
+          <li>Types of evaluations: who does what</li>
+          <li>How to prepare your child for assessment</li>
+          <li>Reading an evaluation report: what matters</li>
+          <li>90-day post-diagnosis action plan</li>
+          <li>Early Intervention: how to enroll immediately</li>
+          <li>Communicating the diagnosis with family &amp; school</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$37 <span>/ listing</span></div>
+        <span class="badge badge-includes">Standalone</span>
+      </div>
+    </div>
+
+    <!-- Guide 5 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #dc2626, #f87171);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 05 · Insurance Battle</div>
+        <div class="guide-title">The Autism Insurance Battle Guide</div>
+        <div class="guide-tagline">Win the denial. Get the therapy paid for.</div>
+        <ul class="guide-features">
+          <li>MHPAEA: the federal law insurers violate most</li>
+          <li>ACA &amp; state mandate requirements</li>
+          <li>5 denial types and how to counter each</li>
+          <li>4-level appeal process (internal → external → complaint → lawsuit)</li>
+          <li>Medical necessity letter language that works</li>
+          <li>State insurance commissioner complaint process</li>
+          <li>Real appeal language examples</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$37 <span>/ listing</span></div>
+        <span class="badge badge-includes">+ Tracker</span>
+      </div>
+    </div>
+
+    <!-- Guide 6 -->
+    <div class="guide-card">
+      <div class="guide-banner" style="background: linear-gradient(90deg, #7c3aed, #a78bfa);"></div>
+      <div class="guide-body">
+        <div class="guide-num">Guide 06 · Transition Planner</div>
+        <div class="guide-title">Transition to Adulthood Planner</div>
+        <div class="guide-tagline">The decade-long plan most families start 10 years too late.</div>
+        <ul class="guide-features">
+          <li>Year-by-year timeline: ages 12 through 22</li>
+          <li>SSI at age 18: the redetermination parents miss</li>
+          <li>Special Needs Trusts vs. ABLE accounts</li>
+          <li>Adult Medicaid waiver enrollment strategy</li>
+          <li>Supported employment options and funding</li>
+          <li>Housing: group homes, supported living, Section 8</li>
+          <li>Guardianship vs. supported decision-making</li>
+        </ul>
+      </div>
+      <div class="guide-footer">
+        <div class="price">$47 <span>/ listing</span></div>
+        <span class="badge badge-includes">+ Checklist</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ BUNDLE ══════════════════ -->
+<div style="background: linear-gradient(180deg, #f8f7ff 0%, #ede9fe 100%); padding: 64px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Best Value</div>
+      <div class="section-title">Complete Autism Parent Toolkit</div>
+      <div class="section-sub">All 6 guides + 5 worksheets + 7 letter templates in one instant download.</div>
+    </div>
+    <div class="bundle-card">
+      <div class="bundle-tag">Listing #7 — Best Seller Target</div>
+      <div class="bundle-title">The Complete Autism Parent Toolkit</div>
+      <div class="bundle-sub">Everything an autism family needs — benefits, school, therapy, insurance, diagnosis, and adulthood planning.</div>
+      <div class="bundle-includes">
+        <div class="bundle-item">Autism Benefits Navigator ($47)</div>
+        <div class="bundle-item">IEP Mastery Playbook ($47)</div>
+        <div class="bundle-item">Complete Therapy Roadmap ($47)</div>
+        <div class="bundle-item">Navigating the Diagnosis ($37)</div>
+        <div class="bundle-item">Insurance Battle Guide ($37)</div>
+        <div class="bundle-item">Transition to Adulthood Planner ($47)</div>
+        <div class="bundle-item">5 Fillable PDF Worksheets</div>
+        <div class="bundle-item">7 Ready-to-Send Letter Templates</div>
+        <div class="bundle-item">18 files, instant delivery</div>
+        <div class="bundle-item">$117 savings vs. buying separate</div>
+      </div>
+      <div class="bundle-pricing">
+        <div class="bundle-price">$127</div>
+        <div class="bundle-compare">
+          <div class="was">$244 if bought separately</div>
+          <div class="save">You save $117</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ WORKSHEETS ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Fillable PDFs</div>
+    <div class="section-title">5 Worksheets — The Action Tools</div>
+    <div class="section-sub">Fillable PDFs bundled with guides. Also sold as a standalone pack on Etsy for $17.</div>
+  </div>
+  <div class="ws-grid">
+    <div class="ws-card">
+      <div class="ws-icon">📋</div>
+      <div class="ws-name">Benefits Audit Worksheet</div>
+      <div class="ws-desc">Track application status for SSI, Medicaid, HCBS, ABLE, SNAP, and grants in one place.</div>
+      <div class="ws-file">01-benefits-audit-worksheet.pdf</div>
+    </div>
+    <div class="ws-card">
+      <div class="ws-icon">🏫</div>
+      <div class="ws-name">IEP Meeting Prep Worksheet</div>
+      <div class="ws-desc">Prepare questions, goals, concerns, and talking points before every IEP meeting.</div>
+      <div class="ws-file">02-iep-meeting-prep-worksheet.pdf</div>
+    </div>
+    <div class="ws-card">
+      <div class="ws-icon">🔬</div>
+      <div class="ws-name">Therapy Provider Comparison</div>
+      <div class="ws-desc">Score and compare ABA, SLT, OT, and other providers across 12 criteria.</div>
+      <div class="ws-file">03-therapy-provider-comparison.pdf</div>
+    </div>
+    <div class="ws-card">
+      <div class="ws-icon">📄</div>
+      <div class="ws-name">Insurance Denial Tracker</div>
+      <div class="ws-desc">Log every denial, deadline, and appeal step so nothing falls through the cracks.</div>
+      <div class="ws-file">04-insurance-denial-tracker.pdf</div>
+    </div>
+    <div class="ws-card">
+      <div class="ws-icon">🗓</div>
+      <div class="ws-name">Transition Planning Checklist</div>
+      <div class="ws-desc">Age-by-age checklist from 12 to 22 — SSI, guardianship, housing, employment milestones.</div>
+      <div class="ws-file">05-transition-planning-checklist.pdf</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TEMPLATES ══════════════════ -->
+<div style="background: white; padding: 64px 24px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Word .docx — Edit &amp; Send</div>
+      <div class="section-title">7 Letter Templates — The Force Multipliers</div>
+      <div class="section-sub">Fill in the brackets and send. These are the letters most families never knew they could write.</div>
+    </div>
+    <div class="tpl-grid">
+      <div class="tpl-card">
+        <div class="tpl-icon">✉️</div>
+        <div class="tpl-name">IEP Evaluation Request Letter</div>
+        <div class="tpl-use">Formally requests a comprehensive evaluation — starts the 60-day IDEA clock.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">📝</div>
+        <div class="tpl-name">IEP Meeting Follow-Up / PWN Request</div>
+        <div class="tpl-use">Creates a paper trail after meetings; requests Prior Written Notice on school decisions.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">🩺</div>
+        <div class="tpl-name">Letter of Medical Necessity</div>
+        <div class="tpl-use">Physician-template justifying ABA, OT, SLT, or any therapy for insurance submission.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">🏥</div>
+        <div class="tpl-name">Insurance Prior Authorization Request</div>
+        <div class="tpl-use">Formal PA request citing MHPAEA parity rights before therapy begins.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">⚖️</div>
+        <div class="tpl-name">Insurance Level 1 Appeal Letter</div>
+        <div class="tpl-use">First-level internal appeal with federal law citations and medical necessity arguments.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">📬</div>
+        <div class="tpl-name">SSI Application Cover Letter</div>
+        <div class="tpl-use">Organizes documentation and flags key impairment evidence for SSA reviewers.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-icon">🔄</div>
+        <div class="tpl-name">SSI Denial / Reconsideration Request</div>
+        <div class="tpl-use">Appeals the initial denial with updated medical evidence and functional limitations.</div>
+        <div class="tpl-format">Word .docx</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ ETSY LISTINGS TABLE ══════════════════ -->
+<div class="section etsy-section" style="background: var(--gray-light);">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 64px 24px;">
+    <div class="section-header">
+      <div class="section-tag">Launch Plan</div>
+      <div class="section-title">9 Etsy Listings — Upload Order</div>
+      <div class="section-sub">Start with #8 and #9 (easiest reviews), then add guides. Bundle converts best.</div>
+    </div>
+    <div style="overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+      <table class="etsy-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Listing Name</th>
+            <th>Files in Zip</th>
+            <th>Price</th>
+            <th>Net (after 10% Etsy fee)</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="listing-num">8</td>
+            <td><strong>Worksheets Pack</strong> — 5 Fillable PDFs for Autism Families</td>
+            <td>5 PDFs</td>
+            <td class="price-tag">$17</td>
+            <td class="net-tag">$15.30</td>
+            <td>Launch First</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">9</td>
+            <td><strong>Letter Templates Pack</strong> — 7 Ready-to-Send Word Templates</td>
+            <td>7 .docx</td>
+            <td class="price-tag">$27</td>
+            <td class="net-tag">$24.30</td>
+            <td>Launch First</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">4</td>
+            <td><strong>Navigating the Diagnosis Journey</strong> — PDF Guide</td>
+            <td>1 PDF</td>
+            <td class="price-tag">$37</td>
+            <td class="net-tag">$33.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">5</td>
+            <td><strong>Autism Insurance Battle Guide</strong> — PDF + Tracker</td>
+            <td>2 files</td>
+            <td class="price-tag">$37</td>
+            <td class="net-tag">$33.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">1</td>
+            <td><strong>Autism Benefits Navigator</strong> — PDF + Worksheet</td>
+            <td>2 files</td>
+            <td class="price-tag">$47</td>
+            <td class="net-tag">$42.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">2</td>
+            <td><strong>IEP Mastery</strong> — PDF + Worksheet</td>
+            <td>2 files</td>
+            <td class="price-tag">$47</td>
+            <td class="net-tag">$42.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">3</td>
+            <td><strong>Complete Therapy Roadmap</strong> — PDF + Worksheet</td>
+            <td>2 files</td>
+            <td class="price-tag">$47</td>
+            <td class="net-tag">$42.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr>
+            <td class="listing-num">6</td>
+            <td><strong>Transition to Adulthood Planner</strong> — PDF + Checklist</td>
+            <td>2 files</td>
+            <td class="price-tag">$47</td>
+            <td class="net-tag">$42.30</td>
+            <td>Week 1</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+          <tr style="background: rgba(107,70,193,0.05);">
+            <td class="listing-num">7</td>
+            <td><strong>Complete Toolkit Bundle</strong> — 18 Files, Best Value</td>
+            <td>18 files</td>
+            <td class="price-tag">$127</td>
+            <td class="net-tag">$114.30</td>
+            <td>Feature Listing</td>
+            <td><span class="status-ready">Zip Ready</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ FILE TREE ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Upload Files</div>
+    <div class="section-title">Everything Ready to Upload</div>
+    <div class="section-sub">9 zips in <code>etsy-launch/upload-bundles/</code> — one per listing.</div>
+  </div>
+  <div class="files-block">
+<span class="dir">autism-resources-business/</span>
+├── <span class="dir">etsy-launch/</span>
+│   └── <span class="dir">upload-bundles/</span>          <span class="comment">← upload these to Etsy</span>
+│       ├── <span class="zip">LISTING-1_Autism-Benefits-Navigator.zip</span>        <span class="comment">206 KB</span>
+│       ├── <span class="zip">LISTING-2_IEP-Mastery.zip</span>                      <span class="comment">161 KB</span>
+│       ├── <span class="zip">LISTING-3_Complete-Therapy-Roadmap.zip</span>         <span class="comment">168 KB</span>
+│       ├── <span class="zip">LISTING-4_Navigating-Diagnosis-Journey.zip</span>     <span class="comment">157 KB</span>
+│       ├── <span class="zip">LISTING-5_Autism-Insurance-Battle-Guide.zip</span>    <span class="comment">163 KB</span>
+│       ├── <span class="zip">LISTING-6_Transition-to-Adulthood-Planner.zip</span>  <span class="comment">166 KB</span>
+│       ├── <span class="zip">LISTING-7_Complete-Toolkit-Bundle.zip</span>          <span class="comment">1.27 MB</span>
+│       ├── <span class="zip">LISTING-8_Worksheets-Pack.zip</span>                  <span class="comment">19 KB</span>
+│       └── <span class="zip">LISTING-9_Letter-Templates-Pack.zip</span>            <span class="comment">244 KB</span>
+│
+├── <span class="dir">products/pdfs/</span>
+│   ├── <span class="pdf">00-free-guide-5-programs.pdf</span>                    <span class="comment">132 KB  [lead magnet]</span>
+│   ├── <span class="pdf">01-autism-benefits-navigator.pdf</span>                <span class="comment">246 KB  [$47]</span>
+│   ├── <span class="pdf">02-iep-mastery.pdf</span>                              <span class="comment">188 KB  [$47]</span>
+│   ├── <span class="pdf">03-therapy-roadmap.pdf</span>                          <span class="comment">199 KB  [$47]</span>
+│   ├── <span class="pdf">04-diagnosis-guide.pdf</span>                          <span class="comment">188 KB  [$37]</span>
+│   ├── <span class="pdf">05-insurance-battle.pdf</span>                         <span class="comment">190 KB  [$37]</span>
+│   └── <span class="pdf">06-transition-planning.pdf</span>                      <span class="comment">192 KB  [$47]</span>
+│
+├── <span class="dir">products/worksheets/</span>
+│   ├── <span class="pdf">01-benefits-audit-worksheet.pdf</span>                 <span class="comment">4.6 KB</span>
+│   ├── <span class="pdf">02-iep-meeting-prep-worksheet.pdf</span>               <span class="comment">5.4 KB</span>
+│   ├── <span class="pdf">03-therapy-provider-comparison-worksheet.pdf</span>    <span class="comment">5.1 KB</span>
+│   ├── <span class="pdf">04-insurance-denial-tracker.pdf</span>                 <span class="comment">5.3 KB</span>
+│   └── <span class="pdf">05-transition-planning-checklist.pdf</span>            <span class="comment">7.6 KB</span>
+│
+└── <span class="dir">products/templates/</span>
+    ├── <span class="docx">01-iep-evaluation-request.docx</span>                  <span class="comment">38 KB</span>
+    ├── <span class="docx">02-iep-followup-pwn-request.docx</span>                <span class="comment">37 KB</span>
+    ├── <span class="docx">03-letter-of-medical-necessity.docx</span>             <span class="comment">38 KB</span>
+    ├── <span class="docx">04-insurance-prior-auth-request.docx</span>            <span class="comment">38 KB</span>
+    ├── <span class="docx">05-insurance-appeal-level1.docx</span>                 <span class="comment">38 KB</span>
+    ├── <span class="docx">06-ssi-application-cover-letter.docx</span>            <span class="comment">38 KB</span>
+    └── <span class="docx">07-ssi-denial-appeal.docx</span>                       <span class="comment">38 KB</span>
+  </div>
+</div>
+
+<!-- ══════════════════ LAUNCH CHECKLIST ══════════════════ -->
+<div style="background: white; padding: 64px 24px;">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Today's Actions</div>
+      <div class="section-title">Etsy Launch Checklist</div>
+      <div class="section-sub">Estimated time: 3–4 hours to go live with all 9 listings.</div>
+    </div>
+    <ul class="checklist">
+      <li class="check-done">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Build all product files</strong><span>7 PDF guides + 5 worksheets + 7 letter templates — DONE</span></div>
+      </li>
+      <li class="check-done">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create Etsy upload bundles (zips)</strong><span>9 zips built and ready in etsy-launch/upload-bundles/ — DONE</span></div>
+      </li>
+      <li class="check-done">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Write all listing copy</strong><span>Titles, tags ×13, full descriptions for all 9 listings — in ETSY_SHOP_GUIDE.md — DONE</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Form your LLC</strong><span>Before first sale — $50–150 via your state's Secretary of State website</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Open Etsy account + shop</strong><span>etsy.com → Sell on Etsy → Open your Etsy shop. Shop name: SpectrumReady</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create shop banner + icon in Canva</strong><span>Icon: navy background, "SR" serif white. Banner: purple gradient, "Guides for Autism Families"</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create Listing #8 (Worksheets Pack)</strong><span>Upload LISTING-8_Worksheets-Pack.zip — price $17 — paste tags from ETSY_SHOP_GUIDE.md</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create Listing #9 (Letter Templates Pack)</strong><span>Upload LISTING-9_Letter-Templates-Pack.zip — price $27</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create Listings #1–6 (Individual Guides)</strong><span>Use title/tags/description from ETSY_SHOP_GUIDE.md — set processing time to "instant"</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Create Listing #7 (Complete Bundle)</strong><span>Upload LISTING-7_Complete-Toolkit-Bundle.zip — price $127 — this is your anchor listing</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Set shop policies</strong><span>Paste from ETSY_SHOP_GUIDE.md Step 9 — instant delivery, contact-us refund policy</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Post in 3 Facebook autism parent groups</strong><span>Soft intro post — offer the free guide, don't pitch listings directly</span></div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Ask 5 people for first reviews</strong><span>After 5 reviews, listing quality score improves. After 10, eligible for Etsy Ads.</span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════ CANVA BRIEF ══════════════════ -->
+<div class="section">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Design Brief</div>
+      <div class="section-title">Canva Assets — Exact Specs</div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <div style="font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); margin-bottom: 12px;">Shop Icon</div>
+        <div style="font-family: sans-serif; font-size: 13px; line-height: 1.8; color: var(--text);">
+          <strong>Size:</strong> 500×500px<br>
+          <strong>Background:</strong> #1a2744 (dark navy)<br>
+          <strong>Text:</strong> "SR" in white<br>
+          <strong>Font:</strong> Serif (Playfair Display or similar)<br>
+          <strong>Style:</strong> Centered, no border, clean<br>
+          <strong>Optional:</strong> Subtle purple glow behind letters
+        </div>
+      </div>
+      <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <div style="font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); margin-bottom: 12px;">Shop Banner</div>
+        <div style="font-family: sans-serif; font-size: 13px; line-height: 1.8; color: var(--text);">
+          <strong>Size:</strong> 3360×840px (Etsy big banner)<br>
+          <strong>Background:</strong> Purple gradient left-to-right (#6b46c1 → #9f7aea)<br>
+          <strong>Main text:</strong> "SpectrumReady" (white, serif, large)<br>
+          <strong>Sub text:</strong> "Guides for Autism Families" (white, sans-serif)<br>
+          <strong>Style:</strong> Minimal. No stock photos needed.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <strong>SpectrumReady</strong> · spectrumready.com · support@spectrumready.com<br><br>
+  <em>This showcase was generated to review all products before Etsy launch. All 19 product files are built and zipped for upload.</em>
+</footer>
+
+</body>
+</html>
