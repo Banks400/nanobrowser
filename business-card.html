@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>B-Holmes Transaction Group</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #042C53;
+      --navy-mid:    #053264;
+      --blue:        #378ADD;
+      --blue-glow:   rgba(55, 138, 221, 0.35);
+      --light-blue:  #85B7EB;
+      --white:       #ffffff;
+      --white-dim:   rgba(255,255,255,0.55);
+      --white-faint: rgba(255,255,255,0.10);
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(55,138,221,0.08) 0%, transparent 70%),
+        linear-gradient(170deg, #021a33 0%, #042C53 55%, #042030 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, Helvetica, Arial, sans-serif;
+      padding: 32px 20px 40px;
+      gap: 36px;
+    }
+
+    /* ────────────────────────────
+       CARD
+    ──────────────────────────── */
+    .card-outer {
+      width: 100%;
+      max-width: 480px;
+      perspective: 1000px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #042C53 0%, #053568 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(55,138,221,0.25);
+      padding: clamp(20px, 5vw, 32px) clamp(18px, 5vw, 28px);
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 1px 0 rgba(255,255,255,0.08) inset,
+        0 12px 40px rgba(0,0,0,0.55),
+        0 4px 12px rgba(0,0,0,0.3),
+        0 0 60px rgba(55,138,221,0.08);
+      aspect-ratio: 1.75 / 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Ambient glow top-right */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 55%;
+      height: 120%;
+      background: radial-gradient(ellipse, rgba(55,138,221,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Bottom-left subtle accent */
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(55,138,221,0.4), transparent);
+    }
+
+    /* ── Header row ── */
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 3vw, 18px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* House mark */
+    .house-mark {
+      flex-shrink: 0;
+      width: clamp(38px, 9vw, 56px);
+      height: auto;
+      filter: drop-shadow(0 2px 6px rgba(55,138,221,0.3));
+    }
+
+    /* Wordmark block */
+    .wordmark-block {
+      display: flex;
+      flex-direction: column;
+      padding-top: 2px;
+    }
+
+    .wordmark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .wordmark-rule {
+      height: 1.5px;
+      border-radius: 1px;
+      background: var(--blue);
+      margin: clamp(4px, 1vw, 6px) 0 clamp(3px, 0.8vw, 5px);
+      width: 100%;
+    }
+
+    .tagline {
+      font-size: clamp(7px, 1.6vw, 10px);
+      font-weight: 500;
+      color: var(--light-blue);
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+    }
+
+    .sub-tagline {
+      font-size: clamp(6px, 1.2vw, 8px);
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* ── Footer: contact ── */
+    .card-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(13px, 3.2vw, 18px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.2px;
+    }
+
+    .contact-title {
+      font-size: clamp(8px, 1.8vw, 11px);
+      color: var(--light-blue);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: clamp(8px, 1.9vw, 11px);
+      color: rgba(255,255,255,0.70);
+      line-height: 1;
+    }
+
+    .contact-item svg {
+      flex-shrink: 0;
+      opacity: 0.55;
+    }
+
+    /* ────────────────────────────
+       NFC SECTION
+    ──────────────────────────── */
+    .nfc-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    /* Main action button */
+    .nfc-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 220px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      box-shadow: 0 4px 24px rgba(55,138,221,0.45), 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .nfc-btn:hover:not(:disabled) {
+      background: #4a9bec;
+      box-shadow: 0 6px 32px rgba(55,138,221,0.6), 0 1px 4px rgba(0,0,0,0.3);
+      transform: translateY(-1px);
+    }
+
+    .nfc-btn:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 16px rgba(55,138,221,0.4);
+    }
+
+    .nfc-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* Shimmer sweep while writing */
+    .nfc-btn.writing::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,0.22) 50%,
+        transparent 70%
+      );
+      animation: shimmer 1.4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    /* NFC radio-wave icon */
+    .nfc-icon {
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .nfc-btn.writing .nfc-icon {
+      animation: nfc-pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes nfc-pulse {
+      0%, 100% { transform: scale(1);   opacity: 1; }
+      50%       { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    /* Status text */
+    .nfc-status {
+      font-size: 13px;
+      text-align: center;
+      min-height: 18px;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.25s;
+      letter-spacing: 0.1px;
+    }
+
+    .nfc-status.writing { color: var(--light-blue); }
+    .nfc-status.success { color: #6fcf97; }
+    .nfc-status.error   { color: #f07070; }
+
+    /* Secondary: download vCard */
+    .save-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid rgba(55,138,221,0.4);
+      color: var(--light-blue);
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .save-btn:hover {
+      border-color: var(--blue);
+      background: rgba(55,138,221,0.1);
+    }
+
+    .save-btn.visible { display: flex; }
+
+    /* Small note */
+    .nfc-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      line-height: 1.55;
+      max-width: 290px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Business Card ── -->
+  <div class="card-outer">
+    <div class="card">
+
+      <!-- Header: house mark + wordmark -->
+      <div class="card-header">
+
+        <!-- House mark (reproduced from brand SVG) -->
+        <svg class="house-mark" viewBox="0 0 72 86" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Left half (dimmer) -->
+          <polygon points="0,54 36,10 36,54"      fill="white" opacity="0.50"/>
+          <rect    x="0"  y="54" width="36" height="32" fill="white" opacity="0.50"/>
+          <!-- Right half (brighter) -->
+          <polygon points="36,10 72,54 36,54"     fill="white" opacity="0.88"/>
+          <rect    x="36" y="54" width="36" height="32" fill="white" opacity="0.88"/>
+          <!-- Chimney -->
+          <rect x="28" y="0"  width="9"  height="18" rx="1.5" fill="#378ADD"/>
+          <!-- Door -->
+          <rect x="28" y="64" width="16" height="22" rx="2"   fill="#042C53"/>
+          <circle cx="41" cy="76" r="1.8" fill="white" opacity="0.50"/>
+          <!-- Windows -->
+          <rect x="5"  y="62" width="12" height="9" rx="1" fill="#042C53" opacity="0.35"/>
+          <rect x="55" y="62" width="12" height="9" rx="1" fill="#042C53" opacity="0.35"/>
+        </svg>
+
+        <!-- Wordmark -->
+        <div class="wordmark-block">
+          <div class="wordmark">B-Holmes</div>
+          <div class="wordmark-rule"></div>
+          <div class="tagline">Transaction Group</div>
+          <div class="sub-tagline">Coordination Services</div>
+        </div>
+
+      </div><!-- /card-header -->
+
+      <!-- Footer: contact info -->
+      <div class="card-footer">
+        <div class="contact-name">Brandon Holmes</div>
+        <div class="contact-title">Transaction Coordinator</div>
+        <div class="contact-details">
+
+          <div class="contact-item">
+            <!-- phone icon -->
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07
+                       A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.18 2 2 0
+                       012.1 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0
+                       01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0
+                       012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+            (555) 123-4567
+          </div>
+
+          <div class="contact-item">
+            <!-- email icon -->
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            brandon@b-holmes.com
+          </div>
+
+          <div class="contact-item">
+            <!-- globe icon -->
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10
+                       15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
+            www.b-holmes.com
+          </div>
+
+        </div>
+      </div><!-- /card-footer -->
+
+    </div><!-- /card -->
+  </div><!-- /card-outer -->
+
+  <!-- ── NFC Controls ── -->
+  <div class="nfc-section">
+
+    <button class="nfc-btn" id="nfcBtn" onclick="writeToNFC()">
+      <!-- NFC radio-wave icon -->
+      <svg class="nfc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+           stroke="white" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M8.56 2.9A7 7 0 0118.44 16" opacity="0.45"/>
+        <path d="M6.13 5.34A10 10 0 0119.85 18" opacity="0.25"/>
+        <path d="M11 12a1 1 0 102 0 1 1 0 00-2 0z" fill="white"/>
+        <path d="M13.54 9.46A4 4 0 0115 12a4 4 0 01-1.46 3.07"/>
+        <path d="M10.46 9.46A4 4 0 009 12a4 4 0 001.46 3.07"/>
+      </svg>
+      <span id="nfcBtnLabel">Bump to Share</span>
+    </button>
+
+    <div class="nfc-status" id="nfcStatus">Ready to write contact to NFC tag</div>
+
+    <button class="save-btn" id="saveBtn" onclick="saveVCard()">
+      <!-- download icon -->
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Save Contact (.vcf)
+    </button>
+
+    <p class="nfc-note">
+      NFC requires Android + Chrome with NFC enabled.<br>
+      Use <em>Save Contact</em> to share on other devices.
+    </p>
+
+  </div>
+
+  <script>
+    /* ── vCard payload ── */
+    const VCARD = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'FN:Brandon Holmes',
+      'N:Holmes;Brandon;;;',
+      'ORG:B-Holmes Transaction Group',
+      'TITLE:Transaction Coordinator',
+      'TEL;TYPE=CELL,VOICE:+15551234567',
+      'EMAIL;TYPE=WORK:brandon@b-holmes.com',
+      'URL:https://www.b-holmes.com',
+      'NOTE:B-Holmes Transaction Group – Coordination Services',
+      'END:VCARD',
+    ].join('\r\n');
+
+    /* ── DOM refs ── */
+    const btn       = document.getElementById('nfcBtn');
+    const btnLabel  = document.getElementById('nfcBtnLabel');
+    const statusEl  = document.getElementById('nfcStatus');
+    const saveBtn   = document.getElementById('saveBtn');
+
+    const nfcSupported = 'NDEFReader' in window;
+
+    function setStatus(msg, type = '') {
+      statusEl.textContent = msg;
+      statusEl.className   = 'nfc-status ' + type;
+    }
+
+    /* ── NFC write ── */
+    async function writeToNFC() {
+      if (!nfcSupported) {
+        setStatus('NFC not available — use Save Contact below.', 'error');
+        saveBtn.classList.add('visible');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.classList.add('writing');
+      btnLabel.textContent = 'Hold near NFC tag…';
+      setStatus('Searching for NFC tag…', 'writing');
+
+      try {
+        const ndef = new NDEFReader();
+        await ndef.write({
+          records: [{
+            recordType: 'mime',
+            mediaType:  'text/vcard',
+            data:       new TextEncoder().encode(VCARD),
+          }],
+        });
+
+        btn.classList.remove('writing');
+        btnLabel.textContent = 'Written ✓';
+        setStatus('Contact written to NFC tag!', 'success');
+
+        setTimeout(resetBtn, 3000);
+
+      } catch (err) {
+        resetBtn();
+        if (err.name === 'NotAllowedError') {
+          setStatus('NFC permission denied. Check browser settings.', 'error');
+        } else if (err.name === 'AbortError') {
+          setStatus('Write cancelled.', '');
+        } else {
+          setStatus('Error: ' + err.message, 'error');
+        }
+        saveBtn.classList.add('visible');
+      }
+    }
+
+    function resetBtn() {
+      btn.disabled = false;
+      btn.classList.remove('writing');
+      btnLabel.textContent = 'Bump to Share';
+      setStatus('Ready to write contact to NFC tag');
+    }
+
+    /* ── vCard download fallback ── */
+    function saveVCard() {
+      const blob = new Blob([VCARD], { type: 'text/vcard;charset=utf-8' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'brandon-holmes.vcf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /* Show fallback immediately if NFC unavailable */
+    if (!nfcSupported) {
+      saveBtn.classList.add('visible');
+      setStatus('NFC not supported on this browser — save contact below.');
+    }
+  </script>
+</body>
+</html>
